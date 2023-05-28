@@ -1,6 +1,5 @@
 # Dict Wordcount
 
-
 ```md
 Write a utility with the following syntax: 
 wordcount dictfile [textfile1 textfile2 ...]
