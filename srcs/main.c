@@ -22,23 +22,21 @@
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-
-
 #include <dict_word_count.h>
 
-static int print_usage()
+static inline int const print_usage()
 {
     printf("Usage: wordcount dictfile [textfile1 textfile2 ...]\n");
     return EXIT_SUCCESS;
 }
 
-static void print_result(const Dictionary *dict,
-                         const uint words_length)
+static inline void print_result(Dictionary const *dict,
+                         uint64_t const words_length)
 {
-    for (uint dict_idx = 0; dict_idx < dict->dict_length; dict_idx++)
+    for (uint64_t dict_idx = 0; dict_idx < dict->dict_length; dict_idx++)
         if (dict->dict_count[dict_idx] > 0)
-            printf("%d\t%s\n", dict->dict_count[dict_idx], dict->words_table[dict_idx]);
-    printf("%d total words\n", words_length);
+            printf("%zu\t%s\n", dict->dict_count[dict_idx], dict->words_table[dict_idx]);
+    printf("%zu total words\n", words_length);
 }
 
 int main(int argc, char const **argv)
@@ -46,8 +44,6 @@ int main(int argc, char const **argv)
 
     if (argc < 2)
         return print_usage();
-
-    int return_value = EXIT_SUCCESS;
     // Process the dictionary file
     // Read the dictionary file
     FILE *dictfile;
@@ -65,7 +61,7 @@ int main(int argc, char const **argv)
     // =============================
     // Process the input stream
     FILE *input_stream;
-    uint words_length = 0;
+    uint32_t words_length = 0;
 
     if (argc < 3)
     {
@@ -79,7 +75,7 @@ int main(int argc, char const **argv)
     {
         // wordcount then processes its input stream:
         // the concatenation of all text files specified on the command line
-        for (uint file_idx = 2; file_idx < argc; file_idx++)
+        for (uint64_t file_idx = 2; file_idx < argc; file_idx++)
         {
             // Read from text files specified on the command line
             input_stream = fopen(argv[file_idx], "r");
@@ -96,5 +92,5 @@ int main(int argc, char const **argv)
     }
     // Print word counts
     print_result(&dict, words_length);
-    return return_value;
+    return EXIT_SUCCESS;
 }

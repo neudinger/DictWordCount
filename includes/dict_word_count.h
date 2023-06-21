@@ -28,6 +28,7 @@
 #include <stdint.h> // uint8_t, uint64_t
 #include <stdlib.h> // uint
 #include <iso646.h> // ISO C Standard:  7.9  Alternative spellings
+#include <sys/types.h>
 
 #pragma once
 
@@ -37,6 +38,8 @@
 #define MAX_WORD_LENGTH 100
 #define MAX_WORDS_TABLE 1000
 #define SEED 42
+
+typedef u_int8_t bool;
 
 // A memory view on the word
 typedef union Key
@@ -50,11 +53,11 @@ typedef union Key
 typedef struct Dictionary
 {
     uint64_t hash_table[MAX_WORDS_TABLE];
-    uint dict_count[MAX_WORDS_TABLE];
+    uint64_t dict_count[MAX_WORDS_TABLE];
     char words_table[MAX_WORDS_TABLE][MAX_WORD_LENGTH];
-    uint dict_length;
+    uint64_t dict_length;
 } Dictionary;
 
 int dict_setup(FILE *, Dictionary *);
-uint analyse(FILE *, Dictionary *);
+uint64_t analyse(FILE *, Dictionary *);
 #endif // DICT_WORD_COUNT

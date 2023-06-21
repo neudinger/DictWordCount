@@ -25,6 +25,14 @@ include(FetchContent)
 # https://github.com/ivafanas/sltbench
 # ---------------------------------------- #
 
+# FetchContent_Declare(
+#     TBB
+#     GIT_REPOSITORY https://github.com/oneapi-src/oneTBB.git
+#     GIT_TAG v2021.5.0
+#     GIT_SHALLOW TRUE
+# )
+# FetchContent_Populate(TBB)
+
 # if(BUILD_TESTING)
 
 #   include(CTest)

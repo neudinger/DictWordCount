@@ -1,5 +1,9 @@
 # Dict Wordcount
 
+git clone --recurse-submodules -j`8`
+git submodule update --init --recursive
+
+
 ```md
 Write a utility with the following syntax: 
 wordcount dictfile [textfile1 textfile2 ...]

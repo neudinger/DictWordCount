@@ -32,13 +32,13 @@ set(CMAKE_C_STANDARD_REQUIRED ON)
 project(${TARGET} LANGUAGES C VERSION ${TARGET_VERSION})
 
 # https://www.openmp.org/
-option(OPENMP "Build ${TARGET} for with multithreading" OFF)
+option(OPENMP "Build ${CMAKE_PROJECT_NAME} for with multithreading" ON)
 # https://github.com/catchorg/Catch2
-option(UNIT_TEST "Build ${TARGET} with unit test" ON)
-option(BDD_TEST "Build ${TARGET} with BDD Catch2 test tool" ON)
-option(BENCH_TEST "Build ${TARGET} with Catch2 bench tool" ON)
+option(UNIT_TEST "Build ${CMAKE_PROJECT_NAME} with unit test" ON)
+option(BDD_TEST "Build ${CMAKE_PROJECT_NAME} with BDD Catch2 test tool" ON)
+option(BENCH_TEST "Build ${CMAKE_PROJECT_NAME} with Catch2 bench tool" ON)
 # https://github.com/ivafanas/sltbench
-option(SLT_BENCH "Build ${TARGET} with sltbench bench tool" ON)
+option(SLT_BENCH "Build ${CMAKE_PROJECT_NAME} with sltbench bench tool" ON)
 
 # https://llvm.org/docs/CMake.html#frequently-used-cmake-variables
 # 1. Release: `-O3 -DNDEBUG`
@@ -56,6 +56,8 @@ set(SRCS_DIR ${CMAKE_CURRENT_LIST_DIR}/srcs)
 set(INCLUDE_DIR ${WORK_DIR}/includes)
 include_directories(${INCLUDE_DIR})
 
+set(EXTERNAL_DEPENDECIES_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/external)
+
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/modules)
 
 file(GLOB
@@ -64,9 +66,11 @@ file(GLOB
 )
 
 add_executable(
-  ${TARGET}
+  ${CMAKE_PROJECT_NAME}
   ${SRCS}
 )
 
 include(OpenMP)
 include(InstallSetup)
+
+# include(UnitTest)
